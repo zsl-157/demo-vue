@@ -1,21 +1,9 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <div class="router-container">
+      <router-link v-for="(item,index) in navitem" :key="index" tag="li" :to="{path:item.to}">{{item.page}}</router-link>
+    </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -24,6 +12,11 @@ export default {
   name: 'app',
   data () {
     return {
+      navitem:[{"page":"首页","to":"/index"},
+      {"page":"知识","to":"/knowl"},
+      {"page":"博客","to":"/blog"},
+      {"page":"游戏","to":"/game"},
+      {"page":"资源","to":"/source"}],
       msg: 'Welcome to Your Vue.js App'
     }
   }
@@ -31,30 +24,45 @@ export default {
 </script>
 
 <style>
+*{
+  padding: 0;
+  margin: 0;
+}
+
+a {
+    background: blue;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+
 }
 
-h1, h2 {
-  font-weight: normal;
+.router-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
 }
-
-ul {
+.router-container li{
+  display: block;
+  background: #4e6ef2;
   list-style-type: none;
-  padding: 0;
+  width:20%;
+  color:white;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  cursor: pointer;
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
+.router-container li:hover{
+  background:#1b35dd;
+
 }
 
-a {
-  color: #42b983;
-}
+
 </style>
