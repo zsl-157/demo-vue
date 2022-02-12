@@ -1,24 +1,43 @@
 <template>
   <div id="app">
     <div class="router-container">
-      <router-link v-for="(item,index) in navitem" :key="index" tag="li" :to="{path:item.to}">{{item.page}}</router-link>
+      <router-link v-for="(item,index) in navitem" :key="index" tag="li" :to="{path:item.to}" @click.native="hideCanvasShowSub(index)">{{item.page}}</router-link>
     </div>
+    
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import indexPage from '../src/components/index.vue';
+import getter from '../src/httphandler/getH';
 export default {
   name: 'app',
   data () {
     return {
-      navitem:[{"page":"首页","to":"/index"},
+      navitem:[{"page":"我来过","to":"/index"},
       {"page":"知识","to":"/knowl"},
-      {"page":"博客","to":"/blog"},
+      {"page":"time axis","to":"/blog"},
       {"page":"游戏","to":"/game"},
-      {"page":"资源","to":"/source"}],
+      {"page":"memorize","to":"/source"}],
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  methods:{
+    hideCanvasShowSub(index){
+      let c = document.getElementsByClassName("canvas-container")
+      console.log("c is",c)
+     
+    },
+    
+  },
+  mounted() {
+      getter();
+     
+    },
+  
+  components:{
+    indexPage
   }
 }
 </script>
@@ -32,6 +51,9 @@ export default {
 a {
     background: blue;
 }
+body{
+background: #ecd9c8;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -40,7 +62,10 @@ a {
   color: #2c3e50;
 
 }
-
+.canvas-container{
+height: 1500px;
+  
+}
 .router-container{
   display: flex;
   flex-direction: row;
@@ -49,7 +74,7 @@ a {
 }
 .router-container li{
   display: block;
-  background: #4e6ef2;
+  background: #7daea8;
   list-style-type: none;
   width:20%;
   color:white;
@@ -60,7 +85,7 @@ a {
 }
 
 .router-container li:hover{
-  background:#1b35dd;
+  background:#509e91;
 
 }
 

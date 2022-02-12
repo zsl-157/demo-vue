@@ -31,7 +31,6 @@ export default {
   data () {
     return {
      username:"",
-     
     }
   },
   methods:{
@@ -40,6 +39,7 @@ export default {
  
 }
 </script>
+
 
 <style>
 .center{

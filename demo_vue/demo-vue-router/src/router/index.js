@@ -10,8 +10,12 @@ import source from "../components/source.vue"
 Vue.use(VueRouter);
 
 const routes = [
+  {
+      path:"",
+      component:indexP
+  },
  {
-   path:"/index/:id",
+   path:"/index",
    component:indexP
  },
  {

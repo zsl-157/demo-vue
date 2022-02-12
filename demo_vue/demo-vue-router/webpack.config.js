@@ -46,9 +46,17 @@ module.exports = {
     extensions: ['*', '.js', '.vue', '.json']
   },
   devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-   overlay: true
+    port:8080,
+    proxy: {
+      '/api/': {
+        target: 'http://192.168.3.84:8081',
+        
+        
+        changeOrigin: true,     // target是域名的话，需要这个参数，
+        secure: false,          // 设置支持https协议的代理
+      },
+      
+    }
   },
   
   performance: {
