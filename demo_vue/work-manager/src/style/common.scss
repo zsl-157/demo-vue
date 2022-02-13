@@ -1,0 +1,13 @@
+@mixin fc {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin bg {
+  background-color: #4e6ef2;
+}
+
+@mixin fontsize {
+  font-size: 18px;
+  
+}
