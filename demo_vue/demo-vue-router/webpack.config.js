@@ -1,22 +1,43 @@
 var path = require('path')
 var webpack = require('webpack')
+var htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    publicPath: './',
+    filename: 'build.js',
+    
+
+    
   },
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          'vue-style-loader',
-          'css-loader'
+          {
+            loader:'css-loader',
+            options: {
+        
+              publicPath: '/' //采用根路径
+          }
+          }
         ],
-      },      {
+      }, 
+      {// 对图片资源文件使用url-loader
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          // 小于10K的图片转成base64编码的dataURL字符串写到代码中
+          limit: 10000,
+          // 其他的图片转移到静态资源文件夹
+          name: 'img/[name].[hash:7].[ext]'
+        }
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
@@ -34,7 +55,8 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]?[hash]'
+          name: '[name].[ext]?[hash]',
+          publicPath: '/' 
         }
       }
     ]
@@ -58,6 +80,13 @@ module.exports = {
       
     }
   },
+  plugins:[
+    new htmlWebpackPlugin({
+      template:path.resolve(__dirname,'index.html')
+    }),
+    
+  ],
+  
   
   performance: {
     hints: false
@@ -74,6 +103,7 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
+    
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       compress: {

@@ -11,7 +11,7 @@
         <button class='login-btn' @click="loginclk">登录</button>
        
     </div>
-    <error :msg="s"></error>
+    <error v-show="showerror" :msg="msg"></error>
   </div>  
 </template>
 
@@ -22,7 +22,8 @@ import error from '../components/error.vue'
      return{
       username:'',
       password:'',
-      s:'打卡机阿第三方可令肌肤'
+      msg:'',
+      showerror:false
      }     
    },
    components:{
@@ -48,16 +49,18 @@ import error from '../components/error.vue'
   }
   input{
     position: relative;
-    height: 3rem;
+    height: 3.5rem;
     width:100%;
     border: none;
+    
     
   }
   .user-con{
     top: 1.5rem;
     width: 100%;
     height: 3rem;
-    border: none;
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 1rem;
     border-bottom: 1px solid #efefef;
     background: white;
   }
